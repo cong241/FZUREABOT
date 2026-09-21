@@ -1,5 +1,6 @@
 from datetime import date
 
+import QQBot
 from QQBot import main
 from qqbot.models import DutyEntry
 from qqbot.service import ReminderResult
@@ -78,3 +79,10 @@ def test_default_opens_gui():
 
     assert main([], app_factory=factory) == 0
     assert created[0].gui_opened is True
+
+
+def test_frozen_app_uses_executable_directory(monkeypatch, tmp_path):
+    executable = tmp_path / "QQ值班机器人.exe"
+    monkeypatch.setattr(QQBot.sys, "frozen", True, raising=False)
+    monkeypatch.setattr(QQBot.sys, "executable", str(executable))
+    assert QQBot.runtime_base_dir() == tmp_path

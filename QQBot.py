@@ -64,6 +64,12 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def runtime_base_dir() -> Path:
+    if getattr(sys, "frozen", False):
+        return Path(sys.executable).resolve().parent
+    return Path(__file__).resolve().parent
+
+
 def main(
     argv: Sequence[str] | None = None,
     *,
@@ -79,7 +85,7 @@ def main(
         print("--dry-run 和 --send-now 不能同时使用", file=sys.stderr)
         return 2
 
-    base_dir = Path(__file__).resolve().parent
+    base_dir = runtime_base_dir()
     try:
         app = app_factory(base_dir)
         tomorrow = today_provider() + timedelta(days=1)
@@ -100,4 +106,3 @@ def main(
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
