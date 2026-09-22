@@ -35,4 +35,3 @@ class SchedulerController:
 
     def run_pending(self) -> None:
         self.schedule.run_pending()
-

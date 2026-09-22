@@ -1,2 +1,1 @@
 """QQ duty reminder application."""
-

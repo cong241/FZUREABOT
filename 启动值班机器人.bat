@@ -13,4 +13,3 @@ if errorlevel 1 (
   echo 程序异常退出，请查看上方提示。
   pause
 )
-

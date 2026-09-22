@@ -62,4 +62,3 @@ class Settings:
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise ValueError("设置文件缺少字段或字段无效") from exc
-
